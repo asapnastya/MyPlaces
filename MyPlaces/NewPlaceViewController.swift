@@ -28,7 +28,7 @@ class NewPlaceViewController: UITableViewController {
         setupEditScreen()
     }
     
-    // MARK:   Table view delegate
+    // MARK: - Table view delegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if indexPath.row == 0 {
@@ -102,7 +102,7 @@ class NewPlaceViewController: UITableViewController {
                   let image = UIImage(data: data) else { return }
             
             imageOfPlace.image = image
-            imageOfPlace.contentMode = .scaleToFill
+            imageOfPlace.contentMode = .scaleAspectFill
             placeName.text = currentPlace?.name
             placeLocation.text = currentPlace?.location
             placeType.text = currentPlace?.type
