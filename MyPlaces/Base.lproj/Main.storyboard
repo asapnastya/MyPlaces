@@ -187,7 +187,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="85" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="ENN-H9-cJu">
-                                <rect key="frame" x="0.0" y="126" width="414" height="770"/>
+                                <rect key="frame" x="0.0" y="127" width="414" height="769"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
@@ -252,20 +252,28 @@
                                     <outlet property="delegate" destination="IRO-pq-vOP" id="Ci5-Xl-A4s"/>
                                 </connections>
                             </tableView>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bordered" selectedSegmentIndex="0" id="UPG-lr-A81">
-                                <rect key="frame" x="0.0" y="93" width="414" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="pJl-Ld-dNO">
+                                <rect key="frame" x="0.0" y="88" width="414" height="39"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="38" id="2qk-5y-4Ia"/>
+                                </constraints>
                                 <segments>
                                     <segment title="Date"/>
                                     <segment title="Name"/>
                                 </segments>
                                 <connections>
-                                    <action selector="sortSelection:" destination="IRO-pq-vOP" eventType="valueChanged" id="yp1-uv-j46"/>
+                                    <action selector="sortSelection:" destination="IRO-pq-vOP" eventType="valueChanged" id="fSN-wY-Q0g"/>
                                 </connections>
                             </segmentedControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Ffj-tn-21L"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="ENN-H9-cJu" firstAttribute="top" secondItem="pJl-Ld-dNO" secondAttribute="bottom" constant="1" id="64b-W7-tuY"/>
+                            <constraint firstItem="pJl-Ld-dNO" firstAttribute="trailing" secondItem="Ffj-tn-21L" secondAttribute="trailing" id="iMo-ZJ-9YA"/>
+                            <constraint firstItem="pJl-Ld-dNO" firstAttribute="leading" secondItem="Ffj-tn-21L" secondAttribute="leading" id="qMp-cd-ANW"/>
+                            <constraint firstItem="pJl-Ld-dNO" firstAttribute="top" secondItem="Ffj-tn-21L" secondAttribute="top" id="tqp-5d-lDP"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="My Places" id="EnV-MO-30E">
                         <barButtonItem key="leftBarButtonItem" title="Item" image="AZ" id="79W-7W-VdO">
@@ -281,7 +289,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="reversedSortingButton" destination="79W-7W-VdO" id="7f5-jN-USe"/>
-                        <outlet property="segmentedControl" destination="UPG-lr-A81" id="jql-gn-4Av"/>
+                        <outlet property="segmentedControl" destination="pJl-Ld-dNO" id="uSY-v0-xl5"/>
                         <outlet property="tableView" destination="ENN-H9-cJu" id="6Rk-Wy-swh"/>
                     </connections>
                 </viewController>
