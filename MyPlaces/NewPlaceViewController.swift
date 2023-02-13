@@ -10,7 +10,7 @@ import SwiftUI
 
 class NewPlaceViewController: UITableViewController {
     
-    var currentPlace: Place?
+    var currentPlace: Place!
     var isImageChanged = false
     
     @IBOutlet weak var imageOfPlace: UIImageView!
@@ -18,11 +18,17 @@ class NewPlaceViewController: UITableViewController {
     @IBOutlet weak var placeName: UITextField!
     @IBOutlet weak var placeLocation: UITextField!
     @IBOutlet weak var placeType: UITextField!
+    @IBOutlet var ratingControl: RatingControl!
+    
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        tableView.tableFooterView = UIView()
+        
+        tableView.tableFooterView = UIView(frame: CGRect(x: 0,
+                                                         y: 0,
+                                                         width: tableView.frame.size.width,
+                                                         height: 1))
         saveButton.isEnabled = false
         placeName.addTarget(self, action: #selector(textFieldChanged), for: .editingChanged)
         setupEditScreen()
@@ -78,7 +84,8 @@ class NewPlaceViewController: UITableViewController {
         let newPlace = Place(name: placeName.text!,
                              location: placeLocation.text,
                              type: placeType.text,
-                             imageData: imageData)
+                             imageData: imageData,
+                             ratingOfPlace: ratingControl.ratingOfPlace)
         
         if currentPlace != nil {
             try! realm.write {
@@ -86,6 +93,7 @@ class NewPlaceViewController: UITableViewController {
                 currentPlace?.location = newPlace.location
                 currentPlace?.type = newPlace.type
                 currentPlace?.imageData = newPlace.imageData
+                currentPlace?.ratingOfPlace = newPlace.ratingOfPlace
             }
         } else {
             StorageManager.saveObject(newPlace)
@@ -106,6 +114,7 @@ class NewPlaceViewController: UITableViewController {
             placeName.text = currentPlace?.name
             placeLocation.text = currentPlace?.location
             placeType.text = currentPlace?.type
+            ratingControl.ratingOfPlace = currentPlace.ratingOfPlace
         }
     }
     
@@ -126,7 +135,6 @@ class NewPlaceViewController: UITableViewController {
 
 // MARK: - Text field delegate
 extension NewPlaceViewController: UITextFieldDelegate {
-    // скрытие клав-ры при нажатии на done
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true

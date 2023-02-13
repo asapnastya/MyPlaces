@@ -47,7 +47,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         if isFiltering {
             return filteredPlaces.count
         }
-        return places.isEmpty ? 0 : places.count
+        return places.count
     }
     
     
@@ -66,14 +66,15 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         cell.locationLabel.text = place.location
         cell.typeLabel.text = place.type
         cell.imageOfPlace.image = UIImage(data: place.imageData!)
-        
-        cell.imageOfPlace.layer.cornerRadius = cell.imageOfPlace.frame.size.height / 1.5
-        cell.imageOfPlace.clipsToBounds = true
-        
+        cell.cosmosView.rating = Double(place.ratingOfPlace)
         return cell
     }
      
     // MARK: - Table view delegate
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         let place = places[indexPath.row]
