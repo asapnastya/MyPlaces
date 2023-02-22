@@ -12,7 +12,7 @@ class CustomTableViewCell: UITableViewCell {
 
     @IBOutlet weak var imageOfPlace: UIImageView! {
         didSet {
-            imageOfPlace.layer.cornerRadius = imageOfPlace.frame.size.height / 1.5
+            imageOfPlace.layer.cornerRadius = imageOfPlace.frame.size.height / 2
             imageOfPlace.clipsToBounds = true
         }
     }
