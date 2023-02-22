@@ -7,43 +7,56 @@
 
 import UIKit
 
+// MARK: - NewPlaceViewController
 class NewPlaceViewController: UITableViewController {
     
+// MARK: - UI
+    @IBOutlet private weak var imageOfPlace: UIImageView!
+    @IBOutlet private weak var saveButton: UIBarButtonItem!
+    @IBOutlet private weak var placeName: UITextField!
+    @IBOutlet private weak var placeLocation: UITextField!
+    @IBOutlet private weak var placeType: UITextField!
+    @IBOutlet private var ratingControl: RatingControl!
+    
+// MARK: - Actions
+    @IBAction func cancelAction(_ sender: Any) {
+        dismiss(animated: true)
+    }
+    
+// MARK: - Params
     var currentPlace: Place!
-    var isImageChanged = false
     
-    @IBOutlet weak var imageOfPlace: UIImageView!
-    @IBOutlet weak var saveButton: UIBarButtonItem!
-    @IBOutlet weak var placeName: UITextField!
-    @IBOutlet weak var placeLocation: UITextField!
-    @IBOutlet weak var placeType: UITextField!
-    @IBOutlet var ratingControl: RatingControl!
+    private var isImageChanged = false
     
-    
+// MARK: - Lifecycle
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         
-        tableView.tableFooterView = UIView(frame: CGRect(x: 0,
-                                                         y: 0,
-                                                         width: tableView.frame.size.width,
-                                                         height: 1))
+        tableView.tableFooterView = UIView(
+            frame: .init(
+                x: 0,
+                y: 0,
+                width: tableView.frame.size.width,
+                height: 1
+            )
+        )
+        
         saveButton.isEnabled = false
         placeName.addTarget(self, action: #selector(textFieldChanged), for: .editingChanged)
         setupEditScreen()
     }
     
-    // MARK: - Table view delegate
+// MARK: - Table view delegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        if indexPath.row == 0 {
-            
+        if indexPath.row == .zero {
             let cameraIcon = UIImage(named: "camera")
             let photoLibraryIcon = UIImage(named: "photo")
             
-            let actionSheet = UIAlertController(title: nil,
-                                                message: nil,
-                                                preferredStyle: .actionSheet)
+            let actionSheet = UIAlertController(
+                title: nil,
+                message: nil,
+                preferredStyle: .actionSheet
+            )
             
             let camera = UIAlertAction(title: "Camera", style: .default) { _ in
                 self.chooseImagePicker(source: .camera)
@@ -64,17 +77,16 @@ class NewPlaceViewController: UITableViewController {
             actionSheet.addAction(cancel)
             
             present(actionSheet, animated: true)
+            
         } else {
             view.endEditing(true)
         }
     }
     
-    // MARK: - Navigation
+// MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        guard
-            let identifier = segue.identifier,
-            let mapView = segue.destination as? MapViewController
+        guard let identifier = segue.identifier,
+              let mapView = segue.destination as? MapViewController
             else { return }
         
         mapView.incomeSegueIdentifier = identifier
@@ -88,17 +100,18 @@ class NewPlaceViewController: UITableViewController {
         }
     }
     
+// MARK: - Open methods
     func savePlace() {
-                
         let image = isImageChanged ? imageOfPlace.image : UIImage(named: "imagePlaceholder")
-        
         let imageData = image?.pngData()
         
-        let newPlace = Place(name: placeName.text!,
-                             location: placeLocation.text,
-                             type: placeType.text,
-                             imageData: imageData,
-                             ratingOfPlace: ratingControl.ratingOfPlace)
+        let newPlace = Place(
+            name: placeName.text!,
+            location: placeLocation.text,
+            type: placeType.text,
+            imageData: imageData,
+            ratingOfPlace: ratingControl.ratingOfPlace
+        )
         
         if currentPlace != nil {
             try! realm.write {
@@ -108,13 +121,14 @@ class NewPlaceViewController: UITableViewController {
                 currentPlace?.imageData = newPlace.imageData
                 currentPlace?.ratingOfPlace = newPlace.ratingOfPlace
             }
+            
         } else {
             StorageManager.saveObject(newPlace)
         }
     }
     
+// MARK: - Private methods
     private func setupEditScreen() {
-                
         if currentPlace != nil {
             setupNavigationBar()
             isImageChanged = true
@@ -132,7 +146,6 @@ class NewPlaceViewController: UITableViewController {
     }
     
     private func setupNavigationBar() {
-        
         if let topItem = navigationController?.navigationBar.topItem {
             topItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil )
         }
@@ -140,14 +153,11 @@ class NewPlaceViewController: UITableViewController {
         title = currentPlace?.name
         saveButton.isEnabled = true
     }
-    
-        @IBAction func cancelAction(_ sender: Any) {
-            dismiss(animated: true)
-        }
 }
 
-// MARK: - Text field delegate
+// MARK: - UITextFieldDelegate
 extension NewPlaceViewController: UITextFieldDelegate {
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
@@ -162,7 +172,7 @@ extension NewPlaceViewController: UITextFieldDelegate {
     }
 }
 
-// MARK: - Work with image
+// MARK: - UIImagePickerControllerDelegate, UINavigationControllerDelegate
 extension NewPlaceViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func chooseImagePicker(source: UIImagePickerController.SourceType) {
@@ -182,14 +192,15 @@ extension NewPlaceViewController: UIImagePickerControllerDelegate, UINavigationC
         imageOfPlace.image = info[.editedImage] as? UIImage
         imageOfPlace.contentMode = .scaleAspectFill
         imageOfPlace.clipsToBounds = true
-        
         isImageChanged = true
         
         dismiss(animated: true)
     }
 }
 
+// MARK: - MapViewControllerDelegate
 extension NewPlaceViewController: MapViewControllerDelegate {
+    
     func getAddress(_ address: String?) {
         placeLocation.text = address
     }

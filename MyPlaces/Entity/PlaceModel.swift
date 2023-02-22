@@ -7,6 +7,7 @@
 
 import RealmSwift
 
+// MARK: - Place
 class Place: Object {
     
     @objc dynamic var name = ""
@@ -16,6 +17,7 @@ class Place: Object {
     @objc dynamic var date = Date()
     @objc dynamic var ratingOfPlace = 0 
 
+// MARK: - init
     convenience init(name: String, location: String?, type: String?, imageData: Data?, ratingOfPlace: Int) {
         self.init()
         self.name = name
