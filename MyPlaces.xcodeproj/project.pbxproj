@@ -17,6 +17,7 @@
 		DC557B3E2986FF6700ADECE1 /* PlaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC557B3D2986FF6700ADECE1 /* PlaceModel.swift */; };
 		DC80CBC2298AB6D30087DC91 /* NewPlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC80CBC1298AB6D30087DC91 /* NewPlaceViewController.swift */; };
 		DCAF9B7C298D79A90010E137 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAF9B7B298D79A90010E137 /* StorageManager.swift */; };
+		DCD39B42299B9206007F3021 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD39B41299B9206007F3021 /* MapViewController.swift */; };
 		DCEC695F29846B3C00361308 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEC695E29846B3C00361308 /* CustomTableViewCell.swift */; };
 		DCF98C4D2997E87300E9C08B /* RatingControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF98C4C2997E87300E9C08B /* RatingControl.swift */; };
 /* End PBXBuildFile section */
@@ -36,6 +37,7 @@
 		DC557B3D2986FF6700ADECE1 /* PlaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceModel.swift; sourceTree = "<group>"; };
 		DC80CBC1298AB6D30087DC91 /* NewPlaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPlaceViewController.swift; sourceTree = "<group>"; };
 		DCAF9B7B298D79A90010E137 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		DCD39B41299B9206007F3021 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		DCEC695E29846B3C00361308 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		DCF98C4C2997E87300E9C08B /* RatingControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingControl.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -90,6 +92,7 @@
 				DCEC695E29846B3C00361308 /* CustomTableViewCell.swift */,
 				DC80CBC1298AB6D30087DC91 /* NewPlaceViewController.swift */,
 				DCF98C4C2997E87300E9C08B /* RatingControl.swift */,
+				DCD39B41299B9206007F3021 /* MapViewController.swift */,
 				DC2793F4298304FC00D23E34 /* Main.storyboard */,
 				DC2793F7298304FD00D23E34 /* Assets.xcassets */,
 				DC2793F9298304FD00D23E34 /* LaunchScreen.storyboard */,
@@ -225,6 +228,7 @@
 				DC80CBC2298AB6D30087DC91 /* NewPlaceViewController.swift in Sources */,
 				DC2793EF298304FC00D23E34 /* AppDelegate.swift in Sources */,
 				DCAF9B7C298D79A90010E137 /* StorageManager.swift in Sources */,
+				DCD39B42299B9206007F3021 /* MapViewController.swift in Sources */,
 				DCF98C4D2997E87300E9C08B /* RatingControl.swift in Sources */,
 				DC557B3E2986FF6700ADECE1 /* PlaceModel.swift in Sources */,
 				DCEC695F29846B3C00361308 /* CustomTableViewCell.swift in Sources */,

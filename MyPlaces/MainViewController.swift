@@ -7,7 +7,6 @@
 
 import UIKit
 import RealmSwift
-import SwiftUI
  
 class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
         

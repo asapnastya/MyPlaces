@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SwiftUI
 
 class NewPlaceViewController: UITableViewController {
     
@@ -70,14 +69,28 @@ class NewPlaceViewController: UITableViewController {
         }
     }
     
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        guard
+            let identifier = segue.identifier,
+            let mapView = segue.destination as? MapViewController
+            else { return }
+        
+        mapView.incomeSegueIdentifier = identifier
+        mapView.mapViewControllerDelegate = self
+        
+        if identifier == "showPlaceOnMap" {
+            mapView.place.name = placeName.text!
+            mapView.place.location = placeLocation.text
+            mapView.place.type = placeType.text
+            mapView.place.imageData = imageOfPlace.image?.pngData()
+        }
+    }
+    
     func savePlace() {
                 
-        var image: UIImage?
-        if isImageChanged {
-            image = imageOfPlace.image
-        } else {
-            image = UIImage(named: "imagePlaceholder")
-        }
+        let image = isImageChanged ? imageOfPlace.image : UIImage(named: "imagePlaceholder")
         
         let imageData = image?.pngData()
         
@@ -173,5 +186,11 @@ extension NewPlaceViewController: UIImagePickerControllerDelegate, UINavigationC
         isImageChanged = true
         
         dismiss(animated: true)
+    }
+}
+
+extension NewPlaceViewController: MapViewControllerDelegate {
+    func getAddress(_ address: String?) {
+        placeLocation.text = address
     }
 }
